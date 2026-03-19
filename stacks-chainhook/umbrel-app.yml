@@ -1,0 +1,49 @@
+manifestVersion: 1
+id: stacks-chainhook
+category: Stacks
+name: Chainhook
+version: "1.9.0"
+icon: https://avatars.githubusercontent.com/u/62304292?s=200&v=4
+tagline: Develop reliable event-driven apps on Bitcoin and Stacks.
+description: >-
+  Chainhook is a reorg-aware blockchain event indexing tool that enables developers to reliably query on-chain data and index custom-built Bitcoin or Stacks events.
+
+
+  - Register predicates to scan historical and live Bitcoin and Stacks transactions.
+
+
+  - Receive HTTP callback notifications when predicates match on-chain activity.
+
+
+  - Reorg-aware: automatically handles Bitcoin and Stacks chain reorganizations.
+
+
+  - Connect your apps to your local Chainhook HTTP API at http://umbrel.local:20456
+
+
+  Note: After installing, restart the Stacks Node app so the node begins forwarding block events to Chainhook.
+developer: Hiro Systems
+website: https://www.hiro.so/chainhook
+submitter: Jasper
+dependencies:
+  - bitcoin
+  - stacks-blockchain
+repo: https://github.com/hirosystems/chainhook
+support: https://discord.gg/hirosystems
+port: 20456
+gallery:
+  - https://i.imgur.com/ozTHpjG.jpg
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >-
+  Chainhook v1.9.0
+
+  - New Nakamoto block fields in /new_block ingestion
+
+  - Signer messages support
+
+  - Increased Stacks event server body size limit to 500MB
+
+  - Various bug fixes and stability improvements
+torOnly: false

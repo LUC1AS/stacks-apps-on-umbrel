@@ -1,0 +1,26 @@
+[storage]
+working_dir = "/data"
+
+[http_api]
+http_port = APP_CHAINHOOK_PORT
+database_uri = "redis://redis:6379/"
+
+[network]
+mode = "mainnet"
+bitcoind_rpc_url = "http://APP_BITCOIN_NODE_IP:APP_BITCOIN_RPC_PORT"
+bitcoind_rpc_username = "APP_BITCOIN_RPC_USER"
+bitcoind_rpc_password = "APP_BITCOIN_RPC_PASS"
+stacks_node_rpc_url = "http://APP_STACKS_BLOCKCHAIN_IP:APP_STACKS_CORE_RPC_PORT"
+stacks_events_ingestion_port = APP_CHAINHOOK_INGESTION_PORT
+
+[limits]
+max_number_of_bitcoin_predicates = 50
+max_number_of_concurrent_bitcoin_scans = 10
+max_number_of_stacks_predicates = 50
+max_number_of_concurrent_stacks_scans = 10
+max_number_of_processing_threads = 4
+max_number_of_networking_threads = 4
+max_caching_memory_size_mb = 2048
+
+[[event_source]]
+tsv_file_url = "https://archive.hiro.so/mainnet/stacks-blockchain-api/mainnet-stacks-blockchain-api-latest"
