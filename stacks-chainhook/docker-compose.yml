@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+  app_proxy:
+    environment:
+      APP_HOST: $APP_CHAINHOOK_IP
+      APP_PORT: $APP_CHAINHOOK_PORT
+
+  chainhook:
+    image: hirosystems/chainhook:latest@sha256:400f9776ed2382ff6b863895a0f95e6bf2879f8bd1290b0f9ff474ff2630c553
+    init: true
+    restart: on-failure
+    stop_grace_period: 1m
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${APP_DATA_DIR}/data/cache:/data
+    command: ["chainhook", "service", "start", "--config-path=/config/chainhook.toml"]
+    ports:
+      - $APP_CHAINHOOK_PORT:$APP_CHAINHOOK_PORT
+    # Port APP_CHAINHOOK_INGESTION_PORT (20455) receives Stacks node events.
+    # It is accessible to other Umbrel containers via the internal network
+    # (10.21.21.102:20455) without needing a host port mapping.
+    networks:
+      default:
+        ipv4_address: $APP_CHAINHOOK_IP
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    init: true
+    restart: on-failure
+    stop_grace_period: 1m
+    volumes:
+      - ${APP_DATA_DIR}/data/redis:/data
+    networks:
+      default:
+        ipv4_address: $APP_CHAINHOOK_REDIS_IP
